@@ -1,0 +1,143 @@
+.section {
+  padding: var(--section-padding);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: block;
+  aspect-ratio: 16 / 10;
+}
+
+.card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-hover);
+  transform: translateY(-4px);
+}
+
+.imageContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.image {
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      transparent 30%,
+      rgba(6, 6, 15, 0.7) 70%,
+      rgba(6, 6, 15, 0.95) 100%);
+  transition: var(--transition-normal);
+}
+
+.card:hover .overlay {
+  background: linear-gradient(180deg,
+      transparent 20%,
+      rgba(6, 6, 15, 0.6) 60%,
+      rgba(6, 6, 15, 0.9) 100%);
+}
+
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  z-index: 1;
+  transform: translateY(8px);
+  transition: var(--transition-normal);
+}
+
+.card:hover .info {
+  transform: translateY(0);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--accent-2);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.arrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: var(--transition-normal);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+}
+
+.card:hover .arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Grid: first card full width on odd count */
+.grid .card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: 600px;
+  justify-self: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    aspect-ratio: 16 / 9;
+  }
+
+  .grid .card:last-child:nth-child(odd) {
+    max-width: 100%;
+  }
+}
